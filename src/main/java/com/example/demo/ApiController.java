@@ -72,6 +72,7 @@ public class ApiController {
             }
         }
     }
+
     //Get /messages/search/{text}, который возвращает индекс первого текста с подстрокой text
     //Get /messages/count, который возвращает количество сообщений
     //Post /messages/{index}/create, который добавляет сообщение с порядковым номером index
