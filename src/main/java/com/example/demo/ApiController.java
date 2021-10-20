@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-@Controller
+
 @RestController
 public class ApiController {
     private List<String> messages = new ArrayList<>();
@@ -14,14 +14,12 @@ public class ApiController {
     public List<String> getMessages() {
         return messages;
     }
-    /* curl -X POST http://localhost:8080/messages -H 'Content-Type:
-   text/plain' -d 'text' */
+    /* curl -X POST http://localhost:8080/messages -H 'Content-Type: text/plain' -d 'text' */
     @PostMapping("messages")
     public void addMessage(@RequestBody String text) {
         messages.add(text);
     }
-    //curl https://reqbin.com/echo/get/json
-    //   -H 'Content-Type: text/plain'
+    //curl -X GET  http://localhost:8080/messages/count
     @GetMapping("messages/{index}")
     public String getMessage(@PathVariable("index") Integer index) {
         return messages.get(index);
@@ -37,8 +35,8 @@ public class ApiController {
         messages.remove((int) i);
         messages.add(i, message);
     }
-    @GetMapping("messages")
-    public int getMessagescount() {
+    @GetMapping("messages/count")
+    public Integer getMessagescount() {
         int k = 0;
         for(int i = 0; i<messages.size(); i++) {
             k+=1;
@@ -51,12 +49,12 @@ public class ApiController {
                                   @RequestBody String message) {
         messages.add(i, message);
     }
-    @GetMapping("messages")
-    public int getMessagetext() {
+    @GetMapping("messages/search/{text}")
+    public int getMessagetext(@PathVariable("text") String b) {
         int k = 0;
         for(int i = 0; i<messages.size(); i++) {
             String a = messages.get(i);
-            if (a.contains("text")) {
+            if (a.contains(b)) {
                k = i;
                break;
             }
