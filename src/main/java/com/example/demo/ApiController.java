@@ -14,6 +14,7 @@ public class ApiController {
     public List<String> getMessages() {
         return messages;
     }
+
     /* curl -X POST http://localhost:8080/messages -H 'Content-Type: text/plain' -d 'text' */
     @PostMapping("messages")
     public void addMessage(@RequestBody String text) {
